@@ -1,0 +1,42 @@
+{% extends 'layout.html' %}
+
+{% block title %}Blog - Metaltech Engineering{% endblock %}
+
+{% block content %}
+<section class="page-header">
+    <div class="container">
+        <h1>Our Blog</h1>
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="{{ url_for('home') }}">Home</a></li>
+                <li class="breadcrumb-item active" aria-current="page">Blog</li>
+            </ol>
+        </nav>
+    </div>
+</section>
+
+<section class="blog-section">
+    <div class="container">
+        <div class="row g-4">
+            {% for post in posts %}
+            <div class="col-lg-4 col-md-6">
+                <div class="blog-card">
+                    <div class="blog-image">
+                        <img src="{{ post.image_url }}" alt="{{ post.title }}" class="img-fluid" loading="lazy">
+                    </div>
+                    <div class="blog-content">
+                        <div class="blog-meta">
+                            <span><i class="fas fa-user"></i> {{ post.author }}</span>
+                            <span><i class="fas fa-calendar-alt"></i> {{ post.date_posted.strftime('%B %d, %Y') }}</span>
+                        </div>
+                        <h3><a href="{{ url_for('blog_post', post_id=post.id) }}">{{ post.title }}</a></h3>
+                        <p>{{ post.content[:150] }}{% if post.content|length > 150 %}...{% endif %}</p>
+                        <a href="{{ url_for('blog_post', post_id=post.id) }}" class="read-more">Read More <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+{% endblock %}

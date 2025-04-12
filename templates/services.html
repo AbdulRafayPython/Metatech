@@ -1,0 +1,70 @@
+{% extends 'layout.html' %}
+
+{% block title %}Services - Metaltech Engineering{% endblock %}
+
+{% block content %}
+<section class="page-header">
+    <div class="container">
+        <h1>Our Services</h1>
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="{{ url_for('home') }}">Home</a></li>
+                <li class="breadcrumb-item active" aria-current="page">Services</li>
+            </ol>
+        </nav>
+    </div>
+</section>
+
+<section class="services-section">
+    <div class="container">
+        <div class="services-intro">
+            <h2>Precision Metal Fabrication Solutions</h2>
+            <p>At Metaltech Engineering, we offer a comprehensive range of metal fabrication services to meet the diverse needs of our clients across various industries. Our team of experienced professionals utilizes state-of-the-art equipment to deliver high-quality solutions tailored to your specific requirements.</p>
+        </div>
+
+        <div class="service-categories">
+            <div class="category-tabs">
+                <ul class="nav nav-pills mb-4" id="services-tab" role="tablist">
+                    <li class="nav-item">
+                        <a class="nav-link {% if not selected_category %}active{% endif %}" href="{{ url_for('services') }}">All Services</a>
+                    </li>
+                    {% for category in categories %}
+                    <li class="nav-item">
+                        <a class="nav-link {% if selected_category == category.category %}active{% endif %}" href="{{ url_for('services', category=category.category) }}">{{ category.category }}</a>
+                    </li>
+                    {% endfor %}
+                </ul>
+            </div>
+
+            <div class="services-list">
+                <div class="row g-4">
+                    {% for service in services %}
+                    <div class="col-md-4">
+                        <div class="service-item">
+                            <div class="service-image">
+                                <img src="{{service.image_url}}" alt="{{ service.name }}" class="img-fluid" loading="lazy">
+                            </div>
+                            <div class="service-details">
+                                <h3>{{ service.name }}</h3>
+                                <p>{{ service.description }}</p>
+                                <a href="{{ url_for('request_quote', service=service.name) }}" class="btn btn-outline-primary">Request Quote</a>
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="cta-section">
+    <div class="container">
+        <div class="cta-content">
+            <h2>Need a Custom Solution?</h2>
+            <p>Our team can create customized fabrication solutions to meet your specific requirements</p>
+            <a href="{{ url_for('contact') }}" class="btn btn-light">Contact Us</a>
+        </div>
+    </div>
+</section>
+{% endblock %}

@@ -1,0 +1,63 @@
+{% extends 'layout.html' %}
+
+{% block title %}Testimonials - Metaltech Engineering{% endblock %}
+
+{% block content %}
+<section class="page-header">
+    <div class="container">
+        <h1>Client Testimonials</h1>
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="{{ url_for('home') }}">Home</a></li>
+                <li class="breadcrumb-item active" aria-current="page">Testimonials</li>
+            </ol>
+        </nav>
+    </div>
+</section>
+
+<section class="testimonials-section">
+    <div class="container">
+        <div class="section-intro">
+            <h2>What Our Clients Say</h2>
+            <p>Don't just take our word for it. Here's what our clients have to say about working with Metaltech Engineering.</p>
+        </div>
+
+        <div class="testimonials-grid">
+            <div class="row g-4">
+                {% for testimonial in testimonials %}
+                <div class="col-md-6">
+                    <div class="testimonial-card">
+                        <div class="testimonial-content">
+                            <div class="rating">
+                                {% for i in range(testimonial.rating) %}
+                                <i class="fas fa-star"></i>
+                                {% endfor %}
+                            </div>
+                            <p>"{{ testimonial.content }}"</p>
+                            <div class="client-info">
+                                <h5>{{ testimonial.client_name }}</h5>
+                                <span>{{ testimonial.company }}</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="testimonial-cta">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-lg-8">
+                <h3>Interested in sharing your experience?</h3>
+                <p>We value feedback from our clients. If you've worked with us and would like to share your experience, please contact us.</p>
+            </div>
+            <div class="col-lg-4 text-lg-end">
+                <a href="{{ url_for('contact') }}" class="btn btn-primary">Contact Us</a>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

@@ -1,0 +1,68 @@
+{% extends 'layout.html' %}
+
+{% block title %}{{ post.title }} - Metaltech Engineering{% endblock %}
+
+{% block content %}
+<section class="page-header">
+    <div class="container">
+        <h1>{{ post.title }}</h1>
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="{{ url_for('home') }}">Home</a></li>
+                <li class="breadcrumb-item"><a href="{{ url_for('blog') }}">Blog</a></li>
+                <li class="breadcrumb-item active" aria-current="page">{{ post.title }}</li>
+            </ol>
+        </nav>
+    </div>
+</section>
+
+<section class="blog-post-section">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8">
+                <article class="blog-post">
+                    <div class="post-image">
+                        <img src="{{ '/' + post.image_url if 'static/' in post.image_url else url_for('static', filename=post.image_url) }}" alt="Image">
+
+                    </div>
+                    <div class="post-meta">
+                        <span><i class="fas fa-user"></i> {{ post.author }}</span>
+                        <span><i class="fas fa-calendar-alt"></i> {{ post.date_posted.strftime('%B %d, %Y') }}</span>
+                    </div>
+                    <div class="post-content">
+                        {{ post.content|safe }}
+                    </div>
+                    <div class="post-share">
+                        <h5>Share This Post:</h5>
+                        <div class="social-share">
+                            <a href="#"><i class="fab fa-facebook-f"></i></a>
+                            <a href="#"><i class="fab fa-twitter"></i></a>
+                            <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                        </div>
+                    </div>
+                </article>
+            </div>
+            <div class="col-lg-4">
+                <div class="sidebar">
+                    <div class="widget">
+                        <h4>Related Posts</h4>
+                        <div class="related-posts">
+                            {% for related in related_posts %}
+                            <div class="related-post-item">
+                                <div class="related-thumb">
+                                    <img src="{{ '/' + related.image_url if 'static/' in related.image_url else url_for('static', filename=related.image_url) }}" alt="{{ related.title }}" class="img-fluid">
+                                </div>
+                                <div class="related-content">
+                                    <h5><a href="{{ url_for('blog_post', post_id=related.id) }}">{{ related.title }}</a></h5>
+                                    <span>{{ related.date_posted.strftime('%B %d, %Y') }}</span>
+                                </div>
+                            </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

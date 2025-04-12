@@ -1,0 +1,116 @@
+{% extends 'layout.html' %}
+
+{% block title %}Contact Us - Metaltech Engineering{% endblock %}
+
+{% block content %}
+<section class="page-header">
+    <div class="container">
+        <h1>Contact Us</h1>
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="{{ url_for('home') }}">Home</a></li>
+                <li class="breadcrumb-item active" aria-current="page">Contact</li>
+            </ol>
+        </nav>
+    </div>
+</section>
+
+<section class="contact-section">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-6">
+                <div class="contact-info">
+                    <h2>Get in Touch</h2>
+                    <p>Have questions about our services or need a quote? Our team is here to help. Fill out the form,
+                        and we'll get back to you as soon as possible.</p>
+
+                    <div class="info-item">
+                        <div class="icon">
+                            <i class="fas fa-map-marker-alt"></i>
+                        </div>
+                        <div class="content">
+                            <h5>Our Location</h5>
+                            <p>Salman Farsi Society, Main Millat Town Road, SFC Karachi.</p>
+                        </div>
+                    </div>
+
+                    <div class="info-item">
+                        <div class="icon">
+                            <i class="fas fa-phone"></i>
+                        </div>
+                        <div class="content">
+                            <h5>Phone Number</h5>
+                            <p>0333-3097008</p>
+                        </div>
+                    </div>
+
+                    <div class="info-item">
+                        <div class="icon">
+                            <i class="fas fa-envelope"></i>
+                        </div>
+                        <div class="content">
+                            <h5>Email Address</h5>
+                            <p>metaltechpk@gmail.com</p>
+                        </div>
+                    </div>
+
+                    <div class="info-item">
+                        <div class="icon">
+                            <i class="fas fa-clock"></i>
+                        </div>
+                        <div class="content">
+                            <h5>Working Hours</h5>
+                            <p>Monday - Friday: 8:00 AM - 6:00 PM</p>
+                            <p>Saturday: 9:00 AM - 1:00 PM</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-6">
+                <div class="contact-form">
+                    <h3>Send Us a Message</h3>
+                    {% with messages = get_flashed_messages() %}
+                    {% if messages %}
+                    {% for message in messages %}
+                    <div class="alert alert-success">{{ message }}</div>
+                    {% endfor %}
+                    {% endif %}
+                    {% endwith %}
+                    <form action="{{ url_for('contact') }}" method="POST">
+                        <div class="mb-3">
+                            <label for="name" class="form-label">Your Name*</label>
+                            <input type="text" class="form-control" id="name" name="name" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="email" class="form-label">Email Address*</label>
+                            <input type="email" class="form-control" id="email" name="email" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="phone" class="form-label">Phone Number</label>
+                            <input type="tel" class="form-control" id="phone" name="phone">
+                        </div>
+                        <div class="mb-3">
+                            <label for="message" class="form-label">Your Message*</label>
+                            <textarea class="form-control" id="message" name="message" rows="5" required></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Send Message</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="map-section">
+    <div class="container">
+        <div class="map-container">
+            <iframe
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3619.671760864487!2d67.16661527441416!3d24.875057894675148!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3eb339edf77f88fd%3A0xe6b5e66c9980995a!2sSalman%20farsi%20masjid%20street!5e0!3m2!1sen!2s!4v1743954139662!5m2!1sen!2s"
+                width="100%" height="450" style="border:0;" allowfullscreen="" loading="lazy"
+                referrerpolicy="no-referrer-when-downgrade">
+            </iframe>
+        </div>
+    </div>
+</section>
+{% endblock %}

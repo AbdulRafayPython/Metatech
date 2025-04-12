@@ -1,0 +1,124 @@
+{% extends 'layout.html' %}
+
+{% block title %}Request a Quote - Metaltech Engineering{% endblock %}
+
+{% block content %}
+<section class="page-header">
+    <div class="container">
+        <h1>Request a Quote</h1>
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="{{ url_for('home') }}">Home</a></li>
+                <li class="breadcrumb-item active" aria-current="page">Request a Quote</li>
+            </ol>
+        </nav>
+    </div>
+</section>
+
+<section class="quote-form-section">
+    <div class="container">
+        <div class="quote-intro">
+            <h2>Get a Free Quote</h2>
+            <p>Please fill out the form below with your project details, and our team will provide you with a customized quote based on your requirements.</p>
+        </div>
+        
+        <div class="row justify-content-center">
+            <div class="col-lg-8">
+                <div class="quote-form-container">
+                    {% with messages = get_flashed_messages() %}
+                        {% if messages %}
+                            {% for message in messages %}
+                                <div class="alert alert-success">{{ message }}</div>
+                            {% endfor %}
+                        {% endif %}
+                    {% endwith %}
+                    <form action="{{ url_for('request_quote') }}" method="POST">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label for="name" class="form-label">Your Name*</label>
+                                    <input type="text" class="form-control" id="name" name="name" required>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label for="email" class="form-label">Email Address*</label>
+                                    <input type="email" class="form-control" id="email" name="email" required>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label for="phone" class="form-label">Phone Number*</label>
+                                    <input type="tel" class="form-control" id="phone" name="phone" required>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label for="service" class="form-label">Service Required*</label>
+                                    <select class="form-select" id="service" name="service" required>
+                                        <option value="" selected disabled>Select a service</option>
+                                        {% for category in categories %}
+                                            <option value="{{ category.category }}">{{ category.category }}</option>
+                                        {% endfor %}
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="mb-3">
+                            <label for="message" class="form-label">Project Details*</label>
+                            <textarea class="form-control" id="message" name="message" rows="5" required placeholder="Please provide details about your project requirements..."></textarea>
+                        </div>
+                        
+                        <div class="text-center mt-4">
+                            <button type="submit" class="btn btn-primary btn-lg">Submit Quote Request</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="quote-process">
+    <div class="container">
+        <div class="section-header">
+            <h2>Our Quote Process</h2>
+            <p>Simple steps to getting your project started</p>
+        </div>
+        <div class="row">
+            <div class="col-md-3">
+                <div class="process-step">
+                    <div class="step-number">1</div>
+                    <h4>Submit Request</h4>
+                    <p>Fill out our quote request form with your project details</p>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="process-step">
+                    <div class="step-number">2</div>
+                    <h4>Project Review</h4>
+                    <p>Our team will review your requirements</p>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="process-step">
+                    <div class="step-number">3</div>
+                    <h4>Quote Preparation</h4>
+                    <p>We'll prepare a detailed quote for your project</p>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="process-step">
+                    <div class="step-number">4</div>
+                    <h4>Project Launch</h4>
+                    <p>Once approved, we'll begin work on your project</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}
